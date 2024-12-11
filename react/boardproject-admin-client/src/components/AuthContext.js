@@ -96,23 +96,25 @@ export const AuthProvider = ({children}) => {
   };
 
   // 로그아웃 처리 함수
-  const handleLogout = async (e) =>{
-    e.preventDefault();
+  const handleLogout = async () =>{
 
     try{
-      await axios.get("http://localhost:8080/admin/logout");
+      const response =  await axios.get("http://localhost:8080/admin/logout");
+      console.log(response);
       // get 비동기 요청
       // /admin/logout
 
-      // 1. setUser(null);
-      setUser(null);
-      // 2. localStorage 비우기
-      localStorage.removeItem('userData');
-      if(localStorage.getItem('expirationTime') !=null) localStorage.removeItem('expirationTime');
+      if(response.status === 200){
+        // 1. setUser(null);
+        setUser(null);
+        // 2. localStorage 비우기
+        localStorage.removeItem('userData');
+        if(localStorage.getItem('expirationTime') !=null) localStorage.removeItem('expirationTime');   
+      }
       
       window.location.href = '/';
-    }catch{
-      alert("로그아웃 실패");
+    }catch(error){
+      alert("로그아웃 중 문제 발생", error);
     }
   };
   

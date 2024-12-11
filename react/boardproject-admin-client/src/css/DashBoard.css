@@ -107,3 +107,28 @@
     border-collapse: collapse;
     font-size: 20px;
 }
+
+/* router 이용 시 css 추가*/
+.router-tab-box {
+    list-style: none;
+    display: flex;
+    
+    padding: 0;
+}
+.router-tab-box a {
+    text-decoration: none;
+    color: black;
+    flex-basis: calc(100%/3);
+    border: 1px solid #ddd;
+    padding: 30px;
+    text-align: center;
+    border-radius: 0 0 10px 10px;
+    font-size: 20px;
+    font-weight: bold;
+    transition: all 0.3s;
+}
+/* Link 태그는 html상 a태그 */
+.router-tab-box a.active {
+    color : #fff;
+    background-color: #007bff;
+}

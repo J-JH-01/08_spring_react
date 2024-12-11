@@ -3,6 +3,7 @@ import DashBoard from './components/DashBoard';
 import Login from './components/Login';
 import { useContext } from 'react';
 import { AuthContext, AuthProvider } from './components/AuthContext';
+import { BrowserRouter } from 'react-router';
 
 // Context API 사용 방법 2가지
 
@@ -36,7 +37,9 @@ function AppComponent() {
       { user ? 
       (
         <div className='body-container'>
-          <DashBoard/>
+          <BrowserRouter>
+            <DashBoard/>
+          </BrowserRouter>
         </div>
       ) : (
         <div className='login-section'>

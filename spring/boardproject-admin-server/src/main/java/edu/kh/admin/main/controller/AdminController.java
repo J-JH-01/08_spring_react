@@ -2,6 +2,8 @@ package edu.kh.admin.main.controller;
 
 import java.util.Enumeration;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -45,16 +47,26 @@ public class AdminController {
 	}
 	
 	@GetMapping("logout")
-	public void logout(HttpSession session) {
-	    // 세션에서 loginMember 가져오기
-	    Member loginMember = (Member) session.getAttribute("loginMember");
-
-	    if (loginMember != null) {
-	        log.info("Logged in member: " + loginMember.toString());
-	        session.invalidate();
-	    } else {
-	        log.info("No loginMember found in session");
-	    }
+	public ResponseEntity<String> logout(HttpSession session){
+		// responseEntity
+		// Spring에서 제공하는 Http 응답 데이터를 커스터마이징 할 수 있도록 지원하는 클래스
+		// Http 상대코드, 헤더(요청,응답), 응답 본문(responsebody)을 모두 설정 가능
+		
+		try {
+			//log.info(session.getAttribute("loginMember").toString());
+			session.invalidate(); // 세션 무효화 처리
+			return ResponseEntity
+					.status(HttpStatus.OK)
+					.body("로그아웃이 완료되었습니다");
+			
+		} catch(Exception e){
+			// 세션 무효화 중 예외 발생한 경우
+			return ResponseEntity
+					.status(HttpStatus.INTERNAL_SERVER_ERROR) // 서버에서 발생한 오류 500번
+					.body("로그 아웃 처리 중 문제가 발생했습니다 : " + e.getMessage());
+					
+		}
+		
 	}
 	
 }
