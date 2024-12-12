@@ -10,7 +10,34 @@
 		AND AUTHORITY = 2
 	 </select>
 	 
+	 <!-- 탈퇴 회원 조회 -->
+	 <select id="selectWithdrawnMemberList">
+	 	SELECT MEMBER_NO, MEMBER_EMAIL, MEMBER_NICKNAME
+	 	FROM "MEMBER"
+	 	WHERE MEMBER_DEL_FL = 'Y'
+	 	ORDER BY MEMBER_NO DESC
+	 </select>
 	 
+	 <!-- 탈퇴 회원 복구 -->
+	 <update id="restoreMember">
+	 	UPDATE "MEMBER" SET
+	 	MEMBER_DEL_FL = 'N'
+	 	WHERE MEMBER_NO = #{memberNo}
+	 	AND MEMBER_DEL_FL = 'Y'
+	 </update>
 	 
+	 <select id="selectdeleteBoardList">
+	 	SELECT BOARD_NO ,BOARD_TITLE , MEMBER_NICKNAME 
+		FROM BOARD
+		JOIN "MEMBER" USING(MEMBER_NO)
+		WHERE BOARD_DEL_FL = 'Y'
+	 </select>
+	 
+	 <update id="restoreBoard">
+	 	UPDATE "BOARD" SET
+	 	BOARD_DEL_FL = 'N'
+	 	WHERE BOARD_NO = #{boardNo}
+	 	AND BOARD_DEL_FL = 'Y'
+	 </update>
 	 
 </mapper>

@@ -1,9 +1,12 @@
 package edu.kh.admin.main.model.service;
 
+import java.util.List;
+
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import edu.kh.admin.main.model.dto.Board;
 import edu.kh.admin.main.model.dto.Member;
 import edu.kh.admin.main.model.mapper.AdminMapper;
 import lombok.RequiredArgsConstructor;
@@ -31,5 +34,31 @@ public class AdminServiceImpl implements AdminService{
 		
 		return loginMember;
 	}
+	
+	// 탈퇴한 회원 조회
+	@Override
+	public List<Member> selectWithdrawnMemberList() {
+		return mapper.selectWithdrawnMemberList();
+	}
+	
+	// 탈퇴 회원 복구
+	@Override
+	public int restoreMember(int memberNo) {
+		return mapper.restoreMember(memberNo);
+	}
+	
+	// 삭제한 게시글 조회
+	@Override
+	public List<Board> deleteBoardList() {
+		return mapper.selectdeleteBoardList();
+	}
+	
+	// 삭제한 게시글 복구
+	@Override
+	public int restoreBoard(int boardNo) {
+		return mapper.restoreBoard(boardNo);
+	}
+	
+	
 	
 }
