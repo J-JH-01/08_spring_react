@@ -155,4 +155,66 @@ public class AdminController {
 					.body("게시글 복구 중 문제가 발생했습니다 : " + e.getMessage());
 		}
 	}
+	
+	// 새로운 가입 회원 조회
+	@GetMapping("newMember")
+	public ResponseEntity<List<Member>> getNewMember(){
+		try {
+			
+			List<Member> newMemberList = service.getNewMember();
+			return ResponseEntity.status(HttpStatus.OK).body(newMemberList);
+			
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+		}
+	}
+	
+	
+	// 게시글 최대 조회
+	@GetMapping("maxReadCount")
+	public ResponseEntity<Object> maxReadCount() {
+		try {
+			Board board = service.maxReadCount();
+			return ResponseEntity.status(HttpStatus.OK).body(board);
+			
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+		}
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

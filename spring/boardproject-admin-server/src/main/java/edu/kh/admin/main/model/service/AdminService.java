@@ -35,4 +35,8 @@ public interface AdminService {
 	 */
 	int restoreBoard(int boardNo);
 
+	List<Member> getNewMember();
+
+	Board maxReadCount();
+
 }
