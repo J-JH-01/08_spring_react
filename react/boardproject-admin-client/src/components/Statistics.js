@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { axiosAPI, axiosApi } from "../api/axiosAPI";
+import { axiosAPI } from "../api/axiosAPI";
+
 
 export default function Statistics() {
   const [readCountData, setReadCountData] = useState(null);
